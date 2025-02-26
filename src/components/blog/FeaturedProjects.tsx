@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import projectsData from "@/data/projects.json";
-import Image from "next/image";
 
 type FeaturedProject = {
     id: number;

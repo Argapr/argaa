@@ -1,7 +1,6 @@
 // src/components/project/Projects.tsx
 import { useState, useEffect } from "react";
 import ProjectCard from "./ProjectCard";
-import { useTheme } from "@/hooks/useTheme";
 
 interface Project {
     id: number;
@@ -14,7 +13,6 @@ interface Project {
 
 const Projects = () => {
     const [projects, setProjects] = useState<Project[]>([]);
-    const { isDark } = useTheme();
 
     useEffect(() => {
         // Load the projects data

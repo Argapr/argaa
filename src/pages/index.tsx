@@ -12,6 +12,27 @@ type Post = {
     image: string;
 };
 
+type RawPost = {
+    id: string;
+    properties: {
+        Name?: {
+            title: { text: { content: string } }[];
+        };
+        Date?: {
+            date?: { start: string };
+        };
+        description?: {
+            rich_text: { text: { content: string } }[];
+        };
+        "Multi-select"?: {
+            multi_select: { name: string }[];
+        };
+        "Files & media"?: {
+            files: { file: { url: string } }[];
+        };
+    };
+};
+
 export default function Home() {
     const [posts, setPosts] = useState<Post[]>([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -28,9 +49,10 @@ export default function Home() {
                 }
                 return res.json();
             })
-            .then((data) => {
+            .then((data: RawPost[]) => {
                 console.log("Fetched Data:", data);
-                const formattedPosts = data.map((post: any) => ({
+
+                const formattedPosts: Post[] = data.map((post) => ({
                     id: post.id,
                     title:
                         post.properties?.Name?.title?.[0]?.text?.content ||
@@ -49,7 +71,7 @@ export default function Home() {
                             ?.content || "No description available.",
                     tags:
                         post.properties?.["Multi-select"]?.multi_select?.map(
-                            (tag: any) => tag.name
+                            (tag) => tag.name
                         ) || [],
                     image:
                         post.properties?.["Files & media"]?.files?.[0]?.file
@@ -58,8 +80,8 @@ export default function Home() {
 
                 // Extract all unique topics from posts
                 const allTopics = new Set<string>();
-                formattedPosts.forEach((post: Post) => {
-                    post.tags.forEach((tag: string) => allTopics.add(tag));
+                formattedPosts.forEach((post) => {
+                    post.tags.forEach((tag) => allTopics.add(tag));
                 });
                 setTopics(Array.from(allTopics));
                 setPosts(formattedPosts);
@@ -79,7 +101,9 @@ export default function Home() {
 
     return (
         <Layout>
-            <h1 className="text-center mb-5 text-3xl font-bold">Arga Pratama</h1>
+            <h1 className="text-center mb-5 text-3xl font-bold">
+                Arga Pratama
+            </h1>
             <p className="text-center mb-20 text-md">
                 Frontend Engineer crafting user-centric web experiences. Writing
                 about <br /> React, TypeScript, and modern web development.

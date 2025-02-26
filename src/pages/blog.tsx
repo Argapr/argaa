@@ -11,6 +11,17 @@ type Post = {
     image: string;
 };
 
+type NotionPost = {
+    id: string;
+    properties: {
+        Name?: { title: { text: { content: string } }[] };
+        Date?: { date?: { start: string } };
+        description?: { rich_text: { text: { content: string } }[] };
+        "Multi-select"?: { multi_select: { name: string }[] };
+        "Files & media"?: { files: { file?: { url: string } }[] };
+    };
+};
+
 export default function Home() {
     const [posts, setPosts] = useState<Post[]>([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -25,9 +36,8 @@ export default function Home() {
                 }
                 return res.json();
             })
-            .then((data) => {
-                console.log("Fetched Data:", data);
-                const formattedPosts = data.map((post: any) => ({
+            .then((data: NotionPost[]) => {
+                const formattedPosts: Post[] = data.map((post) => ({
                     id: post.id,
                     title:
                         post.properties?.Name?.title?.[0]?.text?.content ||
@@ -46,11 +56,11 @@ export default function Home() {
                             ?.content || "No description available.",
                     tags:
                         post.properties?.["Multi-select"]?.multi_select?.map(
-                            (tag: any) => tag.name
+                            (tag) => tag.name
                         ) || [],
                     image:
                         post.properties?.["Files & media"]?.files?.[0]?.file
-                            ?.url || "", // Ambil URL gambar dari Notion
+                            ?.url || "",
                 }));
 
                 setPosts(formattedPosts);
@@ -66,10 +76,6 @@ export default function Home() {
     return (
         <Layout>
             <div className="max-w-3xl mx-auto">
-                {/* <h1 className="text-3xl font-bold mb-8 text-gray-900 dark:text-white">
-                    Blog Posts
-                </h1> */}
-
                 {isLoading && (
                     <div className="flex justify-center py-12">
                         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"></div>

@@ -1,7 +1,10 @@
 import { GetServerSideProps } from "next";
-import { useState } from "react";
 import Layout from "@/components/layout/Layout";
 import { formatDate } from "@/utils/formatDate";
+
+type Tag = {
+    name: string;
+};
 
 type PostProps = {
     post: {
@@ -96,7 +99,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
                 "<p>No content available.</p>",
             tags:
                 data.properties?.["Multi-select"]?.multi_select?.map(
-                    (tag: any) => tag.name
+                    (tag: Tag) => tag.name
                 ) || [],
         };
 

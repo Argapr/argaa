@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Layout from "@/components/layout/Layout";
 import { useTheme } from "@/hooks/useTheme";
+import Image from "next/image";
 
 export default function About() {
     const { isDark } = useTheme();
@@ -16,10 +17,12 @@ export default function About() {
     return (
         <Layout>
             <div className="flex flex-col items-center justify-center">
-                <img
+                <Image
                     src="/images/avatar.jpeg"
                     alt="Arga Pratama"
-                    className="w-32 h-32 rounded-full border-2 border-white mb-6 object-cover"
+                    width={128}
+                    height={128}
+                    className="rounded-full border-2 border-white mb-6 object-cover"
                 />
                 <h1 className="text-4xl font-bold mb-6">Arga Pratama</h1>
                 <p className="text-center max-w-2xl mb-10">
