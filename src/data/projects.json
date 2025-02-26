@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "title": "InStay",
+        "description": "A Flutter-based hotel booking app for admin, cashier, and owner.",
+        "image": "/images/projects/InStay.png",
+        "tools": ["Dart", "Flutter", "Supabase"],
+        "githubUrl": "https://github.com/username/personal-blog"
+    },
+    {
+        "id": 2,
+        "title": "MyMind",
+        "description": "Mymind Terminal is a website for displaying Solana CA.",
+        "image": "/images/projects/mymind.png",
+        "tools": ["React", "TailwindCSS", "JavaScript"],
+        "githubUrl": "https://github.com/Argapr/Mymind"
+    },
+    {
+        "id": 3,
+        "title": "SpinLauch",
+        "description": "Slicing the SpinLaunch web UI",
+        "image": "/images/projects/spinlauch.png",
+        "tools": ["React", "TailwindCSS", "JavaScript"],
+        "githubUrl": "https://github.com/Argapr/spinlaunch"
+    }
+]
