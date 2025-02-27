@@ -7,7 +7,7 @@ type PostCardProps = {
     date: string;
     description: string;
     tags: string[];
-    image: string; // Pastikan ada properti image
+    image: string;
 };
 
 export default function PostCard({

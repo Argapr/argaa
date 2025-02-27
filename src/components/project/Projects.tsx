@@ -1,4 +1,3 @@
-// src/components/project/Projects.tsx
 import { useState, useEffect } from "react";
 import ProjectCard from "./ProjectCard";
 
@@ -15,11 +14,8 @@ const Projects = () => {
     const [projects, setProjects] = useState<Project[]>([]);
 
     useEffect(() => {
-        // Load the projects data
         const loadProjects = async () => {
             try {
-                // In a real app, you'd probably fetch this from an API
-                // For simplicity, we're importing it directly
                 const projectsData = await import("@/data/projects.json");
                 setProjects(projectsData.default);
             } catch (error) {

@@ -5,7 +5,7 @@
         "description": "A Flutter-based hotel booking app for admin, cashier, and owner.",
         "image": "/images/projects/InStay.png",
         "tools": ["Dart", "Flutter", "Supabase"],
-        "githubUrl": "https://github.com/username/personal-blog"
+        "githubUrl": "https://github.com/Argapr/InStay"
     },
     {
         "id": 2,
@@ -22,5 +22,21 @@
         "image": "/images/projects/spinlauch.png",
         "tools": ["React", "TailwindCSS", "JavaScript"],
         "githubUrl": "https://github.com/Argapr/spinlaunch"
+    },
+    {
+        "id": 4,
+        "title": "NesasEskul",
+        "description": "An information and extracurricular schedule platform.",
+        "image": "/images/projects/nesas.png",
+        "tools": ["Next.js", "TailwindCSS", "JavaScript", "Firebase"],
+        "githubUrl": "https://github.com/Argapr/NesasEskul"
+    },
+    {
+        "id": 5,
+        "title": "Admin NesasEskul",
+        "description": "Nesaseskul Admin manages data, announcements, profiles, and extracurricular schedules.",
+        "image": "/images/projects/admin_nesas.png",
+        "tools": ["Next.js", "TailwindCSS", "JavaScript", "Firebase"],
+        "githubUrl": "https://github.com/Argapr/Admin-NesasEskul"
     }
 ]
