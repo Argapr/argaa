@@ -105,8 +105,8 @@ export default function Home() {
                 Arga Pratama
             </h1>
             <p className="text-center mb-20 text-md">
-                Frontend Engineer crafting user-centric web experiences. Writing
-                about <br /> React, TypeScript, and modern web development.
+                Web Developer crafting user-centric web experiences. Writing <br />
+                about REST API, Laravel, Next.js, and React.js.
             </p>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {isLoading && (

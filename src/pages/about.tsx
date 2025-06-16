@@ -26,14 +26,18 @@ export default function About() {
                 />
                 <h1 className="text-4xl font-bold mb-6">Arga Pratama</h1>
                 <p className="text-center max-w-2xl mb-10">
-                    I am a fresh graduate with a strong passion for technology,
-                    particularly in application development with a focus on
-                    visualization and appealing design. I believe that good
-                    design can enhance user experience while creating effective
-                    and user-friendly digital solutions.
+                    I am an 18-year-old fresh graduate and a detail-oriented,
+                    passionate web developer with hands-on experience in
+                    building full-stack web applications using modern JavaScript
+                    technologies such as React, Next.js, Node.js, and Laravel. I
+                    have a strong interest in creating robust backend services
+                    and user-friendly interfaces, with a particular focus on
+                    performance, scalability, and maintainability. Highly
+                    motivated to grow professionally, I am ready to contribute
+                    in both remote and on-site work environments.
                 </p>
                 <a
-                    href="/cv.docx"
+                    href="/CV_Arga-pratama.pdf"
                     download
                     className={`${
                         isDark
