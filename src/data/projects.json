@@ -1,6 +1,22 @@
 [
     {
         "id": 1,
+        "title": "Wedding Invitations",
+        "description": "A responsive wedding invitation website designed to provide an elegant and user-friendly experience for event guests.",
+        "image": "/images/projects/wedding.png",
+        "tools": ["HTML", "CSS", "JavaScript"],
+        "githubUrl": "https://github.com/Argapr/wedding"
+    },
+    {
+        "id": 2,
+        "title": "Pokasi",
+        "description": "A Flutter-based hotel booking app for admin, cashier, and owner.",
+        "image": "/images/projects/pokasi.png",
+        "tools": ["PHP", "CodeIgniter", "MySQL"],
+        "githubUrl": "https://github.com/Argapr/wedding"
+    },
+    {
+        "id": 3,
         "title": "InStay",
         "description": "A Flutter-based hotel booking app for admin, cashier, and owner.",
         "image": "/images/projects/InStay.png",
@@ -8,7 +24,23 @@
         "githubUrl": "https://github.com/Argapr/InStay"
     },
     {
-        "id": 2,
+        "id": 4,
+        "title": "PenaLabs",
+        "description": "A Flutter-based hotel booking app for admin, cashier, and owner.",
+        "image": "/images/projects/penaweb.png",
+        "tools": ["TypeScript", "Next.js", "Firebase"],
+        "githubUrl": "https://github.com/Argapr/wedding"
+    },
+    {
+        "id": 5,
+        "title": "PenaReport",
+        "description": "A Flutter-based hotel booking app for admin, cashier, and owner.",
+        "image": "/images/projects/penamobile.png",
+        "tools": ["Dart", "Flutter", "Firebase"],
+        "githubUrl": "https://github.com/Amelinda2705/pena-report"
+    },
+    {
+        "id": 6,
         "title": "MyMind",
         "description": "Mymind Terminal is a website for displaying Solana CA.",
         "image": "/images/projects/mymind.png",
@@ -16,7 +48,7 @@
         "githubUrl": "https://github.com/Argapr/Mymind"
     },
     {
-        "id": 3,
+        "id": 7,
         "title": "SpinLauch",
         "description": "Slicing the SpinLaunch web UI",
         "image": "/images/projects/spinlauch.png",
@@ -24,7 +56,7 @@
         "githubUrl": "https://github.com/Argapr/spinlaunch"
     },
     {
-        "id": 4,
+        "id": 8,
         "title": "NesasEskul",
         "description": "An information and extracurricular schedule platform.",
         "image": "/images/projects/nesas.png",
@@ -32,7 +64,7 @@
         "githubUrl": "https://github.com/Argapr/NesasEskul"
     },
     {
-        "id": 5,
+        "id": 9,
         "title": "Admin NesasEskul",
         "description": "Nesaseskul Admin manages data, announcements, profiles, and extracurricular schedules.",
         "image": "/images/projects/admin_nesas.png",

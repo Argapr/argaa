@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import ProjectCard from "./ProjectCard";
+import AnimatedSection from "@/components/ui/AnimatedSection";
 
 interface Project {
     id: number;
@@ -26,19 +27,23 @@ const Projects = () => {
         loadProjects();
     }, []);
 
+    if (projects.length === 0) return null;
+
     return (
-        <div className={`py-12 `}>
+        <div className="py-12">
             <div className="container mx-auto px-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {projects.map((project) => (
-                        <ProjectCard
+                <AnimatedSection className="mb-16">
+                    <ProjectCard {...projects[0]} isFeatured={true} />
+                </AnimatedSection>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {projects.slice(1).map((project, index) => (
+                        <AnimatedSection
                             key={project.id}
-                            title={project.title}
-                            description={project.description}
-                            image={project.image}
-                            tools={project.tools}
-                            githubUrl={project.githubUrl}
-                        />
+                            className={`delay-${100 * (index + 1)}`}
+                        >
+                            <ProjectCard {...project} />
+                        </AnimatedSection>
                     ))}
                 </div>
             </div>
