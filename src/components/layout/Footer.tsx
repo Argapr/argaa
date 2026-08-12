@@ -8,6 +8,11 @@ export default function Footer() {
             accent: "bg-nb-lime",
         },
         {
+            label: "GitLab",
+            href: "https://gitlab.com/argaprataman052",
+            accent: "bg-nb-orange",
+        },
+        {
             label: "LinkedIn",
             href: "https://www.linkedin.com/in/arga-pratama-589b242a3/",
             accent: "bg-nb-blue",
@@ -27,7 +32,7 @@ export default function Footer() {
                         </p>
                     </div>
 
-                    <div className="flex gap-4">
+                    <div className="flex flex-wrap justify-center gap-4">
                         {links.map((link) => (
                             <a
                                 key={link.label}

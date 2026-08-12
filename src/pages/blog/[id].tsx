@@ -4,6 +4,7 @@ import Layout from "@/components/layout/Layout";
 import { formatDate } from "@/utils/formatDate";
 import { accentFor } from "@/utils/accent";
 import { ErrorBox, EmptyState } from "@/components/ui/Feedback";
+import { getBlogPost } from "@/lib/notion";
 
 type Tag = {
     name: string;
@@ -80,15 +81,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const { id } = context.params as { id: string };
 
     try {
-        const res = await fetch(
-            `${process.env.NEXT_PUBLIC_BASE_URL || ""}/api/posts/${id}`
-        );
-
-        if (!res.ok) {
-            throw new Error("Failed to fetch post");
-        }
-
-        const data = await res.json();
+        const data = await getBlogPost(id);
 
         const post = {
             id: data.id,
@@ -98,6 +91,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
                 ? formatDate(data.properties.Date.date.start)
                 : "No date",
             description:
+                data.content ||
                 data.properties?.description?.rich_text?.[0]?.text?.content ||
                 "<p>No content available.</p>",
             tags:
