@@ -20,17 +20,20 @@ const SKILL_GROUPS = [
         accent: "bg-nb-pink",
         items: [
             "React.js",
+            "React Native",
             "Next.js",
             "Vue.js",
             "Laravel",
             "Flutter",
             "TailwindCSS",
+            "Zustand",
+            "Tauri",
         ],
     },
     {
         title: "Tools & Platforms",
         accent: "bg-nb-blue",
-        items: ["Git", "GitLab", "VS Code", "Vercel"],
+        items: ["Git", "GitLab", "VS Code", "Vercel", "GCP (Google Cloud Platform)", "Postman"],
     },
     {
         title: "Databases",
@@ -46,7 +49,7 @@ export default function About() {
                 {/* Kiri: profil */}
                 <div>
                     <span className="nb-label bg-nb-orange">
-                        Bandung, Indonesia
+                        Jakarta, Indonesia
                     </span>
 
                     <h1 className="nb-heading mt-5 text-5xl sm:text-6xl">
@@ -56,23 +59,20 @@ export default function About() {
                     </h1>
 
                     <h2 className="mt-4 inline-block border-3 border-nb-border bg-nb-surface px-3 py-1.5 font-display text-sm uppercase tracking-widest shadow-nb-sm">
-                        Web Developer
+                        Full Stack Developer
                     </h2>
 
                     <div className="mt-8 border-l-5 border-nb-border pl-5">
                         <p className="leading-relaxed text-nb-muted">
-                            I am a Web Developer with a strong passion for
-                            creating engaging and impactful website experiences.
-                            I enjoy designing modern, user-friendly interfaces
-                            and combining them with well-structured backend
-                            development.
-                        </p>
-                        <p className="mt-4 leading-relaxed text-nb-muted">
-                            My focus lies in ensuring seamless connections
-                            between every aspect of a website — from UI design
-                            and user interactions to API integrations —
-                            delivering results that are both visually appealing
-                            and highly functional.
+                            I'm a Full Stack Developer with a strong passion for
+                            building products that solve real problems. I enjoy
+                            crafting intuitive, modern interfaces and pairing
+                            them with well-structured, reliable backend systems.
+                            I care about the full picture — from how a user
+                            interacts with a product to how it performs under
+                            the hood — and I'm driven to deliver work that's
+                            both functional and thoughtfully designed, from idea
+                            to deployment.
                         </p>
                     </div>
 
@@ -120,7 +120,7 @@ export default function About() {
                                         <span
                                             key={item}
                                             className={`nb-tag ${accentFor(
-                                                item
+                                                item,
                                             )}`}
                                         >
                                             {item}

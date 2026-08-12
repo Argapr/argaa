@@ -14,6 +14,17 @@ const TICKER = [
     "REACT.JS",
     "TYPESCRIPT",
     "TAILWIND",
+    "GCP",
+    "REACT NATIVE",
+    "FLUTTER",
+    "FIREBASE",
+    "POSTGRESQL",
+    "MYSQL",
+    "MONGODB",
+    "SQLITE",
+    "DOCKER",
+    "TAURI",
+    "ELECTRON",
 ];
 
 export default function Layout({ children }: LayoutProps) {

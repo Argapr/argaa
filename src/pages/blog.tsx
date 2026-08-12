@@ -82,10 +82,10 @@ export default function Home() {
                     <h1 className="nb-heading mt-4 text-5xl sm:text-6xl">
                         Blog
                     </h1>
-                    <p className="mt-4 text-nb-muted">
+                    {/* <p className="mt-4 text-nb-muted">
                         Catatan seputar REST API, Laravel, Next.js, dan
                         React.js.
-                    </p>
+                    </p> */}
                 </div>
 
                 {isLoading && <Loader label="Fetching posts" />}

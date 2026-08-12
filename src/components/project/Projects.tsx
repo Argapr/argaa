@@ -37,8 +37,7 @@ const Projects = () => {
                     Projects
                 </h1>
                 <p className="mt-4 max-w-xl text-nb-muted">
-                    Kumpulan hal yang saya bangun — dari eksperimen kecil sampai
-                    aplikasi yang dipakai orang.
+                    Here are a few of the things I've built.
                 </p>
             </div>
 

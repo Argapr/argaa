@@ -61,7 +61,7 @@ export default function Home() {
                         "Untitled",
                     date: post.properties?.Date?.date?.start
                         ? new Date(
-                              post.properties.Date.date.start
+                              post.properties.Date.date.start,
                           ).toLocaleDateString("id-ID", {
                               day: "2-digit",
                               month: "long",
@@ -73,7 +73,7 @@ export default function Home() {
                             ?.content || "No description available.",
                     tags:
                         post.properties?.["Multi-select"]?.multi_select?.map(
-                            (tag) => tag.name
+                            (tag) => tag.name,
                         ) || [],
                     image:
                         post.properties?.["Files & media"]?.files?.[0]?.file
@@ -105,7 +105,9 @@ export default function Home() {
         <Layout>
             {/* Hero */}
             <section className="mb-16 border-3 border-nb-border bg-nb-surface p-6 shadow-nb-lg sm:p-10">
-                <span className="nb-label bg-nb-lime">Web Developer</span>
+                <span className="nb-label bg-nb-lime">
+                    Full Stack Developer
+                </span>
 
                 <h1 className="nb-heading mt-5 text-5xl sm:text-7xl">
                     Arga
@@ -116,8 +118,8 @@ export default function Home() {
                 </h1>
 
                 <p className="mt-6 max-w-xl text-lg text-nb-muted">
-                    Crafting user-centric web experiences. Writing about REST
-                    API, Laravel, Next.js, and React.js.
+                    Full Stack Developer crafting seamless digital experiences,
+                    end to end.
                 </p>
 
                 <div className="mt-8 flex flex-wrap gap-3">
