@@ -1,6 +1,9 @@
+import Link from "next/link";
 import { GetServerSideProps } from "next";
 import Layout from "@/components/layout/Layout";
 import { formatDate } from "@/utils/formatDate";
+import { accentFor } from "@/utils/accent";
+import { ErrorBox, EmptyState } from "@/components/ui/Feedback";
 
 type Tag = {
     name: string;
@@ -21,10 +24,8 @@ export default function BlogPost({ post, error }: PostProps) {
     if (error) {
         return (
             <Layout>
-                <div className="max-w-3xl mx-auto">
-                    <div className="bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-200 p-4 rounded-lg mb-6">
-                        {error}
-                    </div>
+                <div className="mx-auto max-w-3xl">
+                    <ErrorBox message={error} />
                 </div>
             </Layout>
         );
@@ -33,10 +34,8 @@ export default function BlogPost({ post, error }: PostProps) {
     if (!post) {
         return (
             <Layout>
-                <div className="max-w-3xl mx-auto">
-                    <div className="text-center py-12 text-gray-500 dark:text-gray-400">
-                        Post not found.
-                    </div>
+                <div className="mx-auto max-w-3xl">
+                    <EmptyState message="Post not found." />
                 </div>
             </Layout>
         );
@@ -44,19 +43,23 @@ export default function BlogPost({ post, error }: PostProps) {
 
     return (
         <Layout>
-            <article className="max-w-3xl mx-auto">
-                <header className="mb-8">
-                    <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">
+            <article className="mx-auto max-w-3xl">
+                <Link href="/blog" className="nb-btn mb-8">
+                    ← Back to blog
+                </Link>
+
+                <header className="mb-10 border-3 border-nb-border bg-nb-surface p-6 shadow-nb-lg">
+                    <h1 className="nb-heading text-3xl md:text-4xl">
                         {post.title}
                     </h1>
-                    <p className="text-gray-500 dark:text-gray-400">
+                    <p className="mt-3 inline-block border-2 border-nb-border px-2 py-0.5 font-mono text-xs font-bold text-nb-muted">
                         {post.date}
                     </p>
                     <div className="mt-4 flex flex-wrap gap-2">
                         {post.tags.map((tag) => (
                             <span
                                 key={tag}
-                                className="px-3 py-1 text-sm font-semibold bg-green-600 text-white rounded-full"
+                                className={`nb-tag ${accentFor(tag)}`}
                             >
                                 {tag}
                             </span>
@@ -65,7 +68,7 @@ export default function BlogPost({ post, error }: PostProps) {
                 </header>
 
                 <div
-                    className="prose dark:prose-invert lg:prose-lg max-w-none"
+                    className="prose max-w-none text-nb-ink dark:prose-invert lg:prose-lg"
                     dangerouslySetInnerHTML={{ __html: post.description }}
                 />
             </article>

@@ -1,4 +1,5 @@
 import React from "react";
+import { accentFor } from "@/utils/accent";
 
 interface TopicsListProps {
     topics: string[];
@@ -12,26 +13,32 @@ const TopicsList: React.FC<TopicsListProps> = ({
     onSelectTopic,
 }) => {
     return (
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-                Topics
-            </h2>
-            <div className="flex flex-wrap gap-2">
-                {topics.map((topic) => (
-                    <button
-                        key={topic}
-                        onClick={() => onSelectTopic(topic)}
-                        className={`px-3 py-1 rounded-full text-sm font-medium
-                            ${
+        <div className="nb-card p-5">
+            <h2 className="nb-heading mb-4 text-xl">Topics</h2>
+
+            {topics.length === 0 ? (
+                <p className="font-mono text-sm text-nb-muted">
+                    {"// belum ada topik"}
+                </p>
+            ) : (
+                <div className="flex flex-wrap gap-2">
+                    {topics.map((topic) => (
+                        <button
+                            key={topic}
+                            onClick={() => onSelectTopic(topic)}
+                            className={`border-2 px-3 py-1 text-xs font-bold uppercase tracking-wide transition-all duration-100 hover:-translate-x-0.5 hover:-translate-y-0.5 ${
                                 selectedTopic === topic
-                                    ? "bg-green-600 text-white"
-                                    : "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600"
+                                    ? `border-black text-black shadow-ink hover:shadow-ink-lg ${accentFor(
+                                          topic
+                                      )}`
+                                    : "border-nb-border bg-nb-surface text-nb-ink shadow-nb-sm hover:shadow-nb"
                             }`}
-                    >
-                        {topic}
-                    </button>
-                ))}
-            </div>
+                        >
+                            {topic}
+                        </button>
+                    ))}
+                </div>
+            )}
         </div>
     );
 };

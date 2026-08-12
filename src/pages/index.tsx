@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import PostCard from "@/components/blog/PostCard";
 import Layout from "@/components/layout/Layout";
 import TopicsList from "@/components/blog/TopicsList";
+import { Loader, ErrorBox, EmptyState } from "@/components/ui/Feedback";
 
 type Post = {
     id: string;
@@ -101,48 +103,60 @@ export default function Home() {
 
     return (
         <Layout>
-            <h1 className="text-center mb-5 text-3xl font-bold">
-                Arga Pratama
-            </h1>
-            <p className="text-center mb-20 text-md">
-                Web Developer crafting user-centric web experiences. Writing <br />
-                about REST API, Laravel, Next.js, and React.js.
-            </p>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                {isLoading && (
-                    <div className="flex justify-center py-12">
-                        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"></div>
-                    </div>
-                )}
+            {/* Hero */}
+            <section className="mb-16 border-3 border-nb-border bg-nb-surface p-6 shadow-nb-lg sm:p-10">
+                <span className="nb-label bg-nb-lime">Web Developer</span>
 
-                {error && (
-                    <div className="bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-200 p-4 rounded-lg mb-6">
-                        {error}
-                    </div>
-                )}
+                <h1 className="nb-heading mt-5 text-5xl sm:text-7xl">
+                    Arga
+                    <br />
+                    <span className="bg-nb-yellow px-2 text-black">
+                        Pratama
+                    </span>
+                </h1>
+
+                <p className="mt-6 max-w-xl text-lg text-nb-muted">
+                    Crafting user-centric web experiences. Writing about REST
+                    API, Laravel, Next.js, and React.js.
+                </p>
+
+                <div className="mt-8 flex flex-wrap gap-3">
+                    <Link href="/about" className="nb-btn-accent bg-nb-blue">
+                        About me
+                    </Link>
+                    <Link href="/project" className="nb-btn">
+                        See projects
+                    </Link>
+                </div>
+            </section>
+
+            <div>
+                {isLoading && <Loader label="Fetching posts" />}
+
+                {error && <ErrorBox message={error} />}
 
                 {!isLoading && !error && (
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
                         {/* Left column - Posts */}
                         <div className="lg:col-span-2">
-                            {selectedTopic && (
-                                <div className="mb-6">
-                                    <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                                        Posts tagged with: {selectedTopic}
-                                    </h2>
+                            <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
+                                <h2 className="nb-heading text-2xl">
+                                    {selectedTopic
+                                        ? `# ${selectedTopic}`
+                                        : "Latest posts"}
+                                </h2>
+                                {selectedTopic && (
                                     <button
                                         onClick={() => setSelectedTopic(null)}
-                                        className="text-green-600 dark:text-green-400 hover:underline"
+                                        className="nb-btn"
                                     >
-                                        Show all posts
+                                        Show all
                                     </button>
-                                </div>
-                            )}
+                                )}
+                            </div>
 
                             {filteredPosts.length === 0 ? (
-                                <div className="text-center py-12 text-gray-500 dark:text-gray-400">
-                                    No posts found.
-                                </div>
+                                <EmptyState message="No posts found." />
                             ) : (
                                 <div className="space-y-8">
                                     {filteredPosts.slice(0, 2).map((post) => (
@@ -161,7 +175,7 @@ export default function Home() {
                         </div>
 
                         {/* Right column - Featured Projects & Topics */}
-                        <div className="space-y-8">
+                        <div className="space-y-8 lg:sticky lg:top-32 lg:self-start">
                             <TopicsList
                                 topics={topics}
                                 selectedTopic={selectedTopic}

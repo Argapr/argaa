@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import PostCard from "@/components/blog/PostCard";
 import Layout from "@/components/layout/Layout";
+import { Loader, ErrorBox, EmptyState } from "@/components/ui/Feedback";
 
 type Post = {
     id: string;
@@ -75,23 +76,24 @@ export default function Home() {
 
     return (
         <Layout>
-            <div className="max-w-3xl mx-auto">
-                {isLoading && (
-                    <div className="flex justify-center py-12">
-                        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"></div>
-                    </div>
-                )}
+            <div className="mx-auto max-w-3xl">
+                <div className="mb-10">
+                    <span className="nb-label bg-nb-pink">Journal</span>
+                    <h1 className="nb-heading mt-4 text-5xl sm:text-6xl">
+                        Blog
+                    </h1>
+                    <p className="mt-4 text-nb-muted">
+                        Catatan seputar REST API, Laravel, Next.js, dan
+                        React.js.
+                    </p>
+                </div>
 
-                {error && (
-                    <div className="bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-200 p-4 rounded-lg mb-6">
-                        {error}
-                    </div>
-                )}
+                {isLoading && <Loader label="Fetching posts" />}
+
+                {error && <ErrorBox message={error} />}
 
                 {!isLoading && !error && posts.length === 0 && (
-                    <div className="text-center py-12 text-gray-500 dark:text-gray-400">
-                        No posts found.
-                    </div>
+                    <EmptyState message="No posts found." />
                 )}
 
                 <div className="space-y-8">

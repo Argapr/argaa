@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { accentFor } from "@/utils/accent";
 
 type PostCardProps = {
     id: string;
@@ -19,39 +20,38 @@ export default function PostCard({
     image,
 }: PostCardProps) {
     return (
-        <article className="overflow-hidden border-b pb-6 mb-6 dark:border-gray-700">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+        <article className="nb-card nb-card-hover p-5 sm:p-6">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-12">
                 <div className="md:col-span-8">
-                    <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-4">
-                        <div className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 mr-3 overflow-hidden">
+                    <div className="mb-4 flex flex-wrap items-center gap-3 text-sm">
+                        <div className="h-9 w-9 shrink-0 overflow-hidden border-3 border-nb-border">
                             <Image
                                 src="/images/avatar.jpeg"
                                 alt="Author"
-                                width={32}
-                                height={32}
-                                className="w-full h-full object-cover"
+                                width={36}
+                                height={36}
+                                className="h-full w-full object-cover"
                                 onError={(e) => {
                                     const target = e.target as HTMLImageElement;
                                     target.src = "/default-avatar.jpg";
                                 }}
                             />
                         </div>
-                        <span className="font-medium mr-3">Arga Pratama</span>
-                        <span className="text-green-600 dark:text-green-400">
-                            •
+                        <span className="font-bold uppercase tracking-wide text-nb-ink">
+                            Arga Pratama
                         </span>
-                        <span className="ml-3">{date}</span>
+                        <span className="border-2 border-nb-border px-2 py-0.5 font-mono text-xs font-bold text-nb-muted">
+                            {date}
+                        </span>
                     </div>
 
-                    <div className="mb-3">
-                        <Link href={`/blog/${id}`}>
-                            <h2 className="text-2xl sm:text-3xl font-bold text-black dark:text-white hover:text-green-600 dark:hover:text-green-400 transition-colors">
-                                {title}
-                            </h2>
-                        </Link>
-                    </div>
+                    <Link href={`/blog/${id}`} className="group">
+                        <h2 className="nb-heading mb-3 text-2xl transition-colors sm:text-3xl group-hover:text-nb-pink">
+                            {title}
+                        </h2>
+                    </Link>
 
-                    <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
+                    <p className="mb-4 line-clamp-2 text-nb-muted">
                         {description}
                     </p>
 
@@ -59,7 +59,7 @@ export default function PostCard({
                         {tags.map((tag) => (
                             <span
                                 key={tag}
-                                className="px-3 py-1 text-sm font-semibold bg-green-600 text-white rounded-full"
+                                className={`nb-tag ${accentFor(tag)}`}
                             >
                                 {tag}
                             </span>
@@ -69,7 +69,7 @@ export default function PostCard({
 
                 <div className="md:col-span-4">
                     <Link href={`/blog/${id}`}>
-                        <div className="rounded-lg overflow-hidden h-48 md:h-40 bg-gray-100 dark:bg-gray-700 relative">
+                        <div className="relative h-48 overflow-hidden border-3 border-nb-border bg-nb-surface md:h-40">
                             <Image
                                 src={
                                     image && image.startsWith("http")

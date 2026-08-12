@@ -7,16 +7,49 @@ type LayoutProps = {
     children: ReactNode;
 };
 
+const TICKER = [
+    "REST API",
+    "LARAVEL",
+    "NEXT.JS",
+    "REACT.JS",
+    "TYPESCRIPT",
+    "TAILWIND",
+];
+
 export default function Layout({ children }: LayoutProps) {
     const { isDark } = useTheme();
 
     return (
-        <div className={`min-h-screen flex flex-col ${isDark ? "dark" : ""}`}>
-            <div className="flex-grow bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200">
+        <div className={`flex min-h-screen flex-col ${isDark ? "dark" : ""}`}>
+            <div className="flex flex-grow flex-col text-nb-ink">
                 <Header />
-                <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+                {/* Ticker strip */}
+                <div className="overflow-hidden border-b-3 border-nb-border bg-nb-pink">
+                    <div className="flex w-max animate-marquee">
+                        {[0, 1].map((copy) => (
+                            <div
+                                key={copy}
+                                className="flex shrink-0 items-center py-1.5"
+                                aria-hidden={copy === 1}
+                            >
+                                {TICKER.map((item) => (
+                                    <span
+                                        key={item}
+                                        className="px-4 font-display text-xs uppercase tracking-widest text-black"
+                                    >
+                                        {item} <span className="px-2">★</span>
+                                    </span>
+                                ))}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                <main className="mx-auto w-full max-w-5xl flex-grow px-4 py-12 sm:px-6 lg:px-8">
                     {children}
                 </main>
+
                 <Footer />
             </div>
         </div>
