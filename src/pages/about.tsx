@@ -64,13 +64,15 @@ export default function About() {
 
                     <div className="mt-8 border-l-5 border-nb-border pl-5">
                         <p className="leading-relaxed text-nb-muted">
-                            I'm a Full Stack Developer with a strong passion for
+                            I&apos;m a Full Stack Developer with a strong
+                            passion for
                             building products that solve real problems. I enjoy
                             crafting intuitive, modern interfaces and pairing
                             them with well-structured, reliable backend systems.
                             I care about the full picture — from how a user
                             interacts with a product to how it performs under
-                            the hood — and I'm driven to deliver work that's
+                            the hood — and I&apos;m driven to deliver work
+                            that&apos;s
                             both functional and thoughtfully designed, from idea
                             to deployment.
                         </p>
