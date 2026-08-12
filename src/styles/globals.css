@@ -3,21 +3,113 @@
 @tailwind utilities;
 
 :root {
-    --background: #ffffff;
-    --foreground: #171717;
+    --nb-bg: #fdf3e3;
+    --nb-surface: #ffffff;
+    --nb-ink: #111111;
+    --nb-muted: #4f4f4f;
+    --nb-border: #111111;
+    --nb-shadow: #111111;
+    --nb-grid: rgba(17, 17, 17, 0.08);
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --background: #0a0a0a;
-        --foreground: #ededed;
-    }
+.dark {
+    --nb-bg: #17171b;
+    --nb-surface: #232329;
+    --nb-ink: #f7f5ef;
+    --nb-muted: #b3b1aa;
+    --nb-border: #f7f5ef;
+    --nb-shadow: #f7f5ef;
+    --nb-grid: rgba(247, 245, 239, 0.07);
 }
 
 body {
-    color: var(--foreground);
-    background: var(--background);
-    font-family: Arial, Helvetica, sans-serif;
+    color: var(--nb-ink);
+    background-color: var(--nb-bg);
+    background-image: linear-gradient(var(--nb-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--nb-grid) 1px, transparent 1px);
+    background-size: 32px 32px;
+    font-family: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+}
+
+::selection {
+    background: #ffdd00;
+    color: #111111;
+}
+
+@layer components {
+    /* Panel dasar: border tebal + hard shadow */
+    .nb-card {
+        @apply border-3 border-nb-border bg-nb-surface shadow-nb;
+    }
+
+    /* Panel yang "hidup" saat di-hover */
+    .nb-card-hover {
+        @apply transition-all duration-150 hover:-translate-x-1 hover:-translate-y-1 hover:shadow-nb-lg;
+    }
+
+    .nb-btn {
+        @apply inline-flex items-center justify-center gap-2 border-3 border-nb-border bg-nb-surface px-4 py-2
+               text-sm font-bold uppercase tracking-wide text-nb-ink shadow-nb transition-all duration-100
+               hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-nb-lg
+               active:translate-x-0.5 active:translate-y-0.5 active:shadow-nb-sm;
+    }
+
+    /* Tombol di atas warna aksen — border & shadow selalu hitam */
+    .nb-btn-accent {
+        @apply inline-flex items-center justify-center gap-2 border-3 border-black px-4 py-2
+               text-sm font-bold uppercase tracking-wide text-black shadow-ink transition-all duration-100
+               hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-ink-lg
+               active:translate-x-0.5 active:translate-y-0.5 active:shadow-ink-sm;
+    }
+
+    .nb-tag {
+        @apply inline-block border-2 border-black px-2.5 py-0.5 text-xs font-bold uppercase
+               tracking-wide text-black shadow-ink-sm;
+    }
+
+    .nb-heading {
+        @apply font-display uppercase leading-none tracking-tight text-nb-ink;
+    }
+
+    /* Label kecil bergaya "sticker" untuk judul section */
+    .nb-label {
+        @apply inline-block border-3 border-black px-3 py-1 font-display text-xs uppercase
+               tracking-widest text-black shadow-ink-sm;
+    }
+}
+
+/* Konten artikel (prose) mengikuti bahasa visual neubrutalism */
+.prose :where(h1, h2, h3, h4):not(:where([class~="not-prose"] *)) {
+    font-family: "Archivo Black", "Arial Black", Impact, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+}
+
+.prose :where(a):not(:where([class~="not-prose"] *)) {
+    font-weight: 700;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 3px;
+}
+
+.prose :where(blockquote):not(:where([class~="not-prose"] *)) {
+    border-left-width: 6px;
+    border-color: var(--nb-border);
+    background: #ffdd00;
+    color: #111111;
+    font-style: normal;
+    padding: 0.75rem 1rem;
+}
+
+.prose :where(pre):not(:where([class~="not-prose"] *)) {
+    border: 3px solid var(--nb-border);
+    border-radius: 0;
+    box-shadow: 4px 4px 0 0 var(--nb-shadow);
+}
+
+.prose :where(img):not(:where([class~="not-prose"] *)) {
+    border: 3px solid var(--nb-border);
+    border-radius: 0;
+    box-shadow: 4px 4px 0 0 var(--nb-shadow);
 }
 
 @keyframes fadeInUp {

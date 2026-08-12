@@ -30,22 +30,31 @@ const Projects = () => {
     if (projects.length === 0) return null;
 
     return (
-        <div className="py-12">
-            <div className="container mx-auto px-4">
-                <AnimatedSection className="mb-16">
-                    <ProjectCard {...projects[0]} isFeatured={true} />
-                </AnimatedSection>
+        <div>
+            <div className="mb-10">
+                <span className="nb-label bg-nb-blue">Portfolio</span>
+                <h1 className="nb-heading mt-4 text-5xl sm:text-6xl">
+                    Projects
+                </h1>
+                <p className="mt-4 max-w-xl text-nb-muted">
+                    Kumpulan hal yang saya bangun — dari eksperimen kecil sampai
+                    aplikasi yang dipakai orang.
+                </p>
+            </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {projects.slice(1).map((project, index) => (
-                        <AnimatedSection
-                            key={project.id}
-                            className={`delay-${100 * (index + 1)}`}
-                        >
-                            <ProjectCard {...project} />
-                        </AnimatedSection>
-                    ))}
-                </div>
+            <AnimatedSection className="mb-14">
+                <ProjectCard {...projects[0]} isFeatured={true} />
+            </AnimatedSection>
+
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                {projects.slice(1).map((project, index) => (
+                    <AnimatedSection
+                        key={project.id}
+                        className={`delay-${100 * (index + 1)}`}
+                    >
+                        <ProjectCard {...project} />
+                    </AnimatedSection>
+                ))}
             </div>
         </div>
     );
