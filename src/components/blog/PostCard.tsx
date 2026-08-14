@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { accentFor } from "@/utils/accent";
 
 type PostCardProps = {
@@ -19,8 +20,24 @@ export default function PostCard({
     tags,
     image,
 }: PostCardProps) {
+    const router = useRouter();
+    const href = `/blog/${id}`;
+
     return (
-        <article className="nb-card nb-card-hover p-5 sm:p-6">
+        // Seluruh kartu jadi area klik menuju detail post. Judul tetap berupa
+        // link asli supaya bisa dibuka di tab baru dan tetap terbaca crawler.
+        <article
+            onClick={() => router.push(href)}
+            onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    router.push(href);
+                }
+            }}
+            role="link"
+            tabIndex={0}
+            className="nb-card nb-card-hover group cursor-pointer p-5 sm:p-6"
+        >
             <div className="grid grid-cols-1 gap-6 md:grid-cols-12">
                 <div className="md:col-span-8">
                     <div className="mb-4 flex flex-wrap items-center gap-3 text-sm">
@@ -45,11 +62,14 @@ export default function PostCard({
                         </span>
                     </div>
 
-                    <Link href={`/blog/${id}`} className="group">
-                        <h2 className="nb-heading mb-3 text-2xl transition-colors sm:text-3xl group-hover:text-nb-pink">
+                    <h2 className="nb-heading mb-3 text-2xl transition-colors group-hover:text-nb-pink sm:text-3xl">
+                        <Link
+                            href={href}
+                            onClick={(event) => event.stopPropagation()}
+                        >
                             {title}
-                        </h2>
-                    </Link>
+                        </Link>
+                    </h2>
 
                     <p className="mb-4 line-clamp-2 text-nb-muted">
                         {description}
@@ -68,20 +88,18 @@ export default function PostCard({
                 </div>
 
                 <div className="md:col-span-4">
-                    <Link href={`/blog/${id}`}>
-                        <div className="relative h-48 overflow-hidden border-3 border-nb-border bg-nb-surface md:h-40">
-                            <Image
-                                src={
-                                    image && image.startsWith("http")
-                                        ? image
-                                        : "/images/default-placeholder.jpg"
-                                }
-                                alt={title}
-                                fill
-                                className="object-cover"
-                            />
-                        </div>
-                    </Link>
+                    <div className="relative h-48 overflow-hidden border-3 border-nb-border bg-nb-surface md:h-40">
+                        <Image
+                            src={
+                                image && image.startsWith("http")
+                                    ? image
+                                    : "/images/default-placeholder.jpg"
+                            }
+                            alt={title}
+                            fill
+                            className="object-cover"
+                        />
+                    </div>
                 </div>
             </div>
         </article>

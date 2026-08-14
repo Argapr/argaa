@@ -4,43 +4,19 @@ import PostCard from "@/components/blog/PostCard";
 import Layout from "@/components/layout/Layout";
 import TopicsList from "@/components/blog/TopicsList";
 import { Loader, ErrorBox, EmptyState } from "@/components/ui/Feedback";
-
-type Post = {
-    id: string;
-    title: string;
-    date: string;
-    description: string;
-    tags: string[];
-    image: string;
-};
-
-type RawPost = {
-    id: string;
-    properties: {
-        Name?: {
-            title: { text: { content: string } }[];
-        };
-        Date?: {
-            date?: { start: string };
-        };
-        description?: {
-            rich_text: { text: { content: string } }[];
-        };
-        "Multi-select"?: {
-            multi_select: { name: string }[];
-        };
-        "Files & media"?: {
-            files: { file: { url: string } }[];
-        };
-    };
-};
+import {
+    collectCategories,
+    mapNotionPost,
+    matchesTopic,
+    type BlogPostSummary,
+    type NotionPage,
+} from "@/utils/notionPost";
 
 export default function Home() {
-    const [posts, setPosts] = useState<Post[]>([]);
+    const [posts, setPosts] = useState<BlogPostSummary[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
-    const [topics, setTopics] = useState<string[]>([]);
 
     useEffect(() => {
         setIsLoading(true);
@@ -51,42 +27,8 @@ export default function Home() {
                 }
                 return res.json();
             })
-            .then((data: RawPost[]) => {
-                console.log("Fetched Data:", data);
-
-                const formattedPosts: Post[] = data.map((post) => ({
-                    id: post.id,
-                    title:
-                        post.properties?.Name?.title?.[0]?.text?.content ||
-                        "Untitled",
-                    date: post.properties?.Date?.date?.start
-                        ? new Date(
-                              post.properties.Date.date.start,
-                          ).toLocaleDateString("id-ID", {
-                              day: "2-digit",
-                              month: "long",
-                              year: "numeric",
-                          })
-                        : "No date",
-                    description:
-                        post.properties?.description?.rich_text?.[0]?.text
-                            ?.content || "No description available.",
-                    tags:
-                        post.properties?.["Multi-select"]?.multi_select?.map(
-                            (tag) => tag.name,
-                        ) || [],
-                    image:
-                        post.properties?.["Files & media"]?.files?.[0]?.file
-                            ?.url || "",
-                }));
-
-                // Extract all unique topics from posts
-                const allTopics = new Set<string>();
-                formattedPosts.forEach((post) => {
-                    post.tags.forEach((tag) => allTopics.add(tag));
-                });
-                setTopics(Array.from(allTopics));
-                setPosts(formattedPosts);
+            .then((data: NotionPage[]) => {
+                setPosts(data.map(mapNotionPost));
                 setIsLoading(false);
             })
             .catch((error) => {
@@ -96,9 +38,11 @@ export default function Home() {
             });
     }, []);
 
-    // Filter posts based on selected topic
+    // Topics diambil dari properti Category di Notion.
+    const topics = collectCategories(posts);
+
     const filteredPosts = selectedTopic
-        ? posts.filter((post) => post.tags.includes(selectedTopic))
+        ? posts.filter((post) => matchesTopic(post, selectedTopic))
         : posts;
 
     return (
@@ -168,7 +112,7 @@ export default function Home() {
                                             title={post.title}
                                             date={post.date}
                                             description={post.description}
-                                            tags={post.tags}
+                                            tags={post.labels}
                                             image={post.image}
                                         />
                                     ))}

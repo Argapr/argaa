@@ -3,19 +3,13 @@ import { NotionToMarkdown } from "notion-to-md";
 import { remark } from "remark";
 import html from "remark-html";
 import dotenv from "dotenv";
+import type { NotionPage } from "@/utils/notionPost";
 
 dotenv.config();
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 
-export type BlogPostPage = {
-    id: string;
-    properties?: {
-        Name?: { title?: { text?: { content?: string } }[] };
-        Date?: { date?: { start?: string } | null };
-        description?: { rich_text?: { text?: { content?: string } }[] };
-        "Multi-select"?: { multi_select?: { name: string }[] };
-    };
+export type BlogPostPage = NotionPage & {
     content: string;
 };
 

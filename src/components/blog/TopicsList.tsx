@@ -1,5 +1,5 @@
 import React from "react";
-import { accentFor } from "@/utils/accent";
+import TopicButton from "@/components/blog/TopicButton";
 
 interface TopicsListProps {
     topics: string[];
@@ -23,19 +23,12 @@ const TopicsList: React.FC<TopicsListProps> = ({
             ) : (
                 <div className="flex flex-wrap gap-2">
                     {topics.map((topic) => (
-                        <button
+                        <TopicButton
                             key={topic}
+                            label={topic}
+                            isActive={selectedTopic === topic}
                             onClick={() => onSelectTopic(topic)}
-                            className={`border-2 px-3 py-1 text-xs font-bold uppercase tracking-wide transition-all duration-100 hover:-translate-x-0.5 hover:-translate-y-0.5 ${
-                                selectedTopic === topic
-                                    ? `border-black text-black shadow-ink hover:shadow-ink-lg ${accentFor(
-                                          topic
-                                      )}`
-                                    : "border-nb-border bg-nb-surface text-nb-ink shadow-nb-sm hover:shadow-nb"
-                            }`}
-                        >
-                            {topic}
-                        </button>
+                        />
                     ))}
                 </div>
             )}

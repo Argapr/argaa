@@ -16,6 +16,14 @@ const nextConfig: NextConfig = {
                 protocol: "https",
                 hostname: "prod-files-secure.s3.us-west-2.amazonaws.com", // Bisa digunakan Notion juga
             },
+            {
+                protocol: "https",
+                hostname: "file.notion.so", // Host baru untuk file upload Notion
+            },
+            {
+                protocol: "https",
+                hostname: "img.notion.so",
+            },
         ],
     },
 };
