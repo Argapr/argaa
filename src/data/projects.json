@@ -1,6 +1,14 @@
 [
     {
         "id": 1,
+        "title": "Inovio",
+        "description": "A mobile app for payment and top-up (PPOB) transactions such as mobile credit, bills, and other digital services, featuring a stored balance to simplify recurring transactions",
+        "image": "/images/projects/inovio.png",
+        "tools": ["React Native", "Laravel", "TypeScript" ],
+        "githubUrl": "https://github.com/Argapr/wedding"
+    },
+    {
+        "id": 2,
         "title": "Wedding Invitations",
         "description": "A responsive wedding invitation website designed to provide an elegant and user-friendly experience for event guests.",
         "image": "/images/projects/wedding.png",
